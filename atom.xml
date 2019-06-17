@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heuje.top</id>
     <title>Heuje</title>
-    <updated>2019-06-17T03:00:57.299Z</updated>
+    <updated>2019-06-17T03:02:11.858Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heuje.top"/>
     <link rel="self" href="https://heuje.top/atom.xml"/>
@@ -23,7 +23,7 @@ vim
 vim 是 “vimsual interface IMproved”的简称，它可以执行输出、删除、查找、替换、块操作等众多文本操作，而且用户可以根据自己的需要对其进行定制，这是其他编辑程序所没有的</p>
 <p>vim 不是一个排版程序，它不像MS Word 或 WPS 那样可以对字体、格式、段落等其他属性进行编排，它只是一个文本编辑程序</p>
 <p>vim 是全屏幕文本编辑器，它没有菜单，只有命令
-<img src="https://heuje.top/post-images/1560740446228.png" alt=""></p>
+<img src="https://heuje.top/post-images/1560740527968.png" alt=""></p>
 <p>文本编辑器的模式
 1）命令行模式
 2）输入模式、编辑模式
