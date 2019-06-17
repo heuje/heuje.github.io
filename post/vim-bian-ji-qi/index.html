@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>vim编辑器 | Heuje</title>
-<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560740784084">
+<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560742133023">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heuje.top/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://heuje.top">
-  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560740784084" alt="">
+  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560742133023" alt="">
   </a>
   <h1 class="site-title">
     Heuje
@@ -91,45 +91,56 @@
               </div>
             
             <div class="post-content">
-              <p>文本编辑器vim
-vim的工作模式
-进入与退出vim
-vim
-vim 是 “vimsual interface IMproved”的简称，它可以执行输出、删除、查找、替换、块操作等众多文本操作，而且用户可以根据自己的需要对其进行定制，这是其他编辑程序所没有的</p>
+              <h3 id="vim的工作模式">* vim的工作模式</h3>
+<h3 id="进入与退出vim">* 进入与退出vim</h3>
+<h3 id="vim">vim</h3>
+<p>vim 是 “vimsual interface IMproved”的简称，它可以执行输出、删除、查找、替换、块操作等众多文本操作，而且用户可以根据自己的需要对其进行定制，这是其他编辑程序所没有的</p>
 <p>vim 不是一个排版程序，它不像MS Word 或 WPS 那样可以对字体、格式、段落等其他属性进行编排，它只是一个文本编辑程序</p>
 <p>vim 是全屏幕文本编辑器，它没有菜单，只有命令
 <img src="https://heuje.top/post-images/1560740527968.png" alt=""></p>
-<p>文本编辑器的模式
-1）命令行模式
+<p>文本编辑器的模式</p>
+<pre><code>1）命令行模式
 2）输入模式、编辑模式
 3）末行模式
 4）替换模式
-命令行模式</p>
-<p>存盘 ZZ 保存退出</p>
-<p>光标移动：
-移动光标 h j k l 左 下 上 右
-光标移到本行开头home
-移到本行末尾 end
-光标移到末尾 G
-光标移到开头gg
-光标移动一个单词w</p>
-<p>粘贴复制：
+</code></pre>
+<h2 id="命令行模式">命令行模式</h2>
+<pre><code>存盘 ZZ 保存退出
+
+光标移动：
+移动光标 h j k l 左 下 上 右 
+光标移到本行开头home 
+移到本行末尾 end 
+光标移到末尾 G 
+光标移到开头gg 
+光标移动一个单词w
+</code></pre>
+<pre><code>粘贴复制：
 复制一行 yy 复制 n行 nyy
-粘贴 p</p>
-<p>删除:
+粘贴 p
+
+
+删除:
 删除字符 x 向后删除 X 向前删除
 删除一行 dd ndd
-删除一个单词 dw</p>
-<p>撤销：
-撤销操作 u 向上一步 . 重复上一次操作</p>
-<p>查找:
-查找/string define \ 转义字符 查找“/bin/bash” //bin/bash</p>
-<p>删除与修改
+删除一个单词 dw
+
+
+撤销：
+撤销操作 u 向上一步 . 重复上一次操作
+
+
+查找:
+查找/string define \ 转义字符 查找“/bin/bash” /\/bin\/bash
+
+
+删除与修改
 “编辑”是指文字的添加、修改以及删除，甚至包括文字区块的移动、复制等。
 在vim 中一般认为输入与编辑是两个概念。
-编辑是在命令模式下进行的，先利用命令移动光标来定位到要进行编辑的地方，然后再使用相应的命令进行编辑；而输入是在插入模式下进行的。</p>
-<p>在命令模式下常用的编辑命令：
-x     删除光标所在字符。
+编辑是在命令模式下进行的，先利用命令移动光标来定位到要进行编辑的地方，然后再使用相应的命令进行编辑；而输入是在插入模式下进行的。
+</code></pre>
+<p>在命令模式下常用的编辑命令：</p>
+<pre><code>x     删除光标所在字符。
 dd     删除光标所在的行。
 r     修改光标所在字符，r 后是要修正的字符。
 R     进入替换状态，输入的文本会覆盖原先的资料。
@@ -138,7 +149,8 @@ S     删除光标所在的行，并进入输入模式。
 cc     修改整行文字。
 u     撤消上一次操作。
 .     重复上一次操作。
-编辑模式</p>
+</code></pre>
+<p>编辑模式</p>
 <p>输入模式
 在输入模式下，屏幕的左下方会出现INSERT 字样。
 在输入状态下，用户可以输入文本的内容<br>
@@ -159,20 +171,22 @@ esc
 只要在命令模式下输入命令“：”即可进入末行模式。</p>
 <p>在末行模式下，可以进行保存文件、退出vim、进行查找和替换等操作。
 :</p>
-<p>当同时编辑多个文件时  因为同一时间只能显示一个文件，所以在VI中切换打开的文件可以使用N或n来切换打开的文件
-:n 切换下一个文件
+<p>当同时编辑多个文件时  因为同一时间只能显示一个文件，所以在VI中切换打开的文件可以使用N或n来切换打开的文件</p>
+<pre><code>:n 切换下一个文件
 :N 切换上一个文件
 :q 退出
 :q! 强制退出不保存
 :w
-:wq</p>
-<p>替换
-:s/old/new 只替换光标所在行的第一个old string
+:wq
+</code></pre>
+<p>替换</p>
+<pre><code>:s/old/new 只替换光标所在行的第一个old string
 :s/old/new/g 将本行（光标）的所有old string替换为new string   g global  n代表一个行号
 :%s/old/new/g 将本文中所有的old string替换为new string
 :1,2s/old/new/g 替换1到2行中的old string为new string
 :.,2s/old/new/g .代表光标所在行 当前行到第二行的
-:2,$s/old/new/g 替换2到最后一行中的old string为new string</p>
+:2,$s/old/new/g 替换2到最后一行中的old string为new string
+</code></pre>
 <p>:set nu 显示行号
 :set nonu
 :!command 在vim编辑器中执行一条命令（不许要退出当前的编辑，可以在编辑器中执行命令，类似退出编辑器执行命令）</p>
