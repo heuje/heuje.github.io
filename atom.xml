@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heuje.top</id>
     <title>Heuje</title>
-    <updated>2019-06-17T05:18:44.814Z</updated>
+    <updated>2019-06-17T05:49:03.236Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heuje.top"/>
     <link rel="self" href="https://heuje.top/atom.xml"/>
@@ -224,6 +224,15 @@ uid,gid从1000开始
 例如：使用useradd a
 
 创建a的家目录为/rhome/a uid 1000 gid 1000 shell:/bin/csh
+</code></pre>
+<p><img src="https://heuje.top/post-images/1560750471912.png" alt=""></p>
+<pre><code>useradd -u 1500 -G root -d /tmp/user01 -s /bin/bash -c &quot;该用户uid is 1500;附属于root组;家目录为为/tmp/user001;登录shell为/bin/bash&quot; user01
+
+useradd -r -M -s /sbin/nologin user02
+
+useradd -f 3 -e 2019-07-01 user03
+
+useradd  -o  -u 0 -g 0 rooter
 </code></pre>
 ]]></content>
     </entry>

@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>用户和组 | Heuje</title>
-<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560748722441">
+<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560750540995">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heuje.top/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://heuje.top">
-  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560748722441" alt="">
+  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560750540995" alt="">
   </a>
   <h1 class="site-title">
     Heuje
@@ -295,6 +295,15 @@ uid,gid从1000开始
 例如：使用useradd a
 
 创建a的家目录为/rhome/a uid 1000 gid 1000 shell:/bin/csh
+</code></pre>
+<p><img src="https://heuje.top/post-images/1560750471912.png" alt=""></p>
+<pre><code>useradd -u 1500 -G root -d /tmp/user01 -s /bin/bash -c &quot;该用户uid is 1500;附属于root组;家目录为为/tmp/user001;登录shell为/bin/bash&quot; user01
+
+useradd -r -M -s /sbin/nologin user02
+
+useradd -f 3 -e 2019-07-01 user03
+
+useradd  -o  -u 0 -g 0 rooter
 </code></pre>
 
             </div>
