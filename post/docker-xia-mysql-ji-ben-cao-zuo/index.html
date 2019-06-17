@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>docker下MySQL基本操作 | Heuje</title>
-<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560740609441">
+<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560740784084">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://heuje.top/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://heuje.top">
-  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560740609441" alt="">
+  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560740784084" alt="">
   </a>
   <h1 class="site-title">
     Heuje
@@ -120,37 +120,41 @@ docker images -a</p>
 </li>
 </ol>
 <p>—— 想要服务一直运行可以：</p>
-<h2 id="docker-run-p-33063306-name-jy_mysql-e-mysql_root_password123456-d-mysql参数-p-设置端口-name-取名-e-mysql_root_password123456-设置-账号为-root-密码为-123456-d-表示作为一个守护进程在后台运行">docker run -p 3306:3306 --name JY_mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+<h2 id="docker-run-p-33063306-name-jy_mysql-e-mysql_root_password123456-d-mysql参数-p-设置端口-name-取名-e-mysql_root_password123456-设置-账号为-root-密码为-123456-d-表示作为一个守护进程在后台运行"><code>docker run -p 3306:3306 --name JY_mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql</code>
 （参数 -p 设置端口，--name 取名 ，-e MYSQL_ROOT_PASSWORD=123456 设置 账号为 root ，密码为 123456 ，    -d 表示作为一个守护进程在后台运行 ）</h2>
 <p>原文：https://blog.csdn.net/jiangyu1013/article/details/79958410</p>
 <p>进入MySQL
-docker ps -a
+<code>docker ps -a</code>
 docker port 容器名字
 至于相关文件地址配置 ，可以在运行容器时设置(但要求对应路径对应文件已存在，才能成功挂载相内容到对应位置。)
-docker run -p 3306:3306 --name mysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+<code>docker run -p 3306:3306 --name mysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v</code>$PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 命令说明：</p>
 <p>-p 3306:3306：将容器的3306端口映射到主机的3306端口</p>
 <p>-v $PWD/conf/my.cnf:/etc/mysql/my.cnf：将主机当前目录下的conf/my.cnf挂载到容器的/etc/mysql/my.cnf</p>
 <p>-v $PWD/logs:/logs：将主机当前目录下的logs目录挂载到容器的/logs</p>
 <p>-v $PWD/data:/mysql_data：将主机当前目录下的data目录挂载到容器的/mysql_data</p>
 <p>-e MYSQL_ROOT_PASSWORD=123456：初始化root用户的密码</p>
-<p>docker exec -it 8b6952783afc /bin/bash</p>
+<p><code>docker exec -it 8b6952783afc /bin/bash</code></p>
 <p>Ctrl + D退出</p>
-<p>mysql -u root
+<pre><code>mysql -u root
 use mysql
-设置密码:
-UPDATE user SET password=PASSWORD('新的密码') WHERE user='root';</p>
+</code></pre>
+<p>设置密码:
+<code>UPDATE user SET password=PASSWORD('新的密码') WHERE user='root';</code></p>
 <p>设置存储上限
 修改mysql/bin/my.ini
-max_allowed_packet = 16M</p>
+<code>max_allowed_packet = 16M</code></p>
 <p>登录数据库服务
-mysql -h 127.0.0.1 -u root -p -P 3306</p>
+<code>mysql -h 127.0.0.1 -u root -p -P 3306</code></p>
 <p>修改权限，使得用户在其他主机仍然能够登录root用户并访问数据库
-grant all privileges on <em>.</em> to 'root'@'%' identified by '你的密码' with grant option;</p>
+<code>grant all privileges on *.* to 'root'@'%' identified by '你的密码' with grant option;</code></p>
 <p>修改sql_mode:
-set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';</p>
+<code>set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';</code></p>
 <p>如果上面设置完成后依然报错，这里执行下面的SQL，将全局设置更改，然后必须关闭现有的连接，重新打开连接后查询即可</p>
-<h2 id="set-global-sql_modestrict_trans_tablesno_zero_in_dateno_zero_dateerror_for_division_by_zerono_auto_create_userno_engine_substitution">set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';</h2>
+<blockquote>
+<p><code>set global sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';</code></p>
+</blockquote>
+<hr>
 <p>原文：https://blog.csdn.net/qq_28867949/article/details/76850378</p>
 
             </div>
