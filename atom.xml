@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heuje.top</id>
     <title>Heuje</title>
-    <updated>2019-06-17T03:02:11.858Z</updated>
+    <updated>2019-06-17T03:03:31.404Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heuje.top"/>
     <link rel="self" href="https://heuje.top/atom.xml"/>
@@ -115,25 +115,28 @@ esc
 <p>~/.viminfo vim历史编辑文档</p>
 <p>~/.vimrc vim个性设置文档</p>
 <p>自定义文件头注释 ~/.vimrc</p>
-<p>autocmd BufNewFile <em>.py,</em>.sh,*.c exec &quot;:call SetTitle()&quot;</p>
-<p>func SetTitle()
-if &amp;filetype == 'python'
-call setline(1,&quot;#!/usr/bin/env python&quot;)
-call append(line(&quot;.&quot;),&quot;#enconding=utf-8&quot;)
-call append(line(&quot;.&quot;)+1, &quot;#Author: Bai Shuming&quot;)
-call append(line(&quot;.&quot;)+2, &quot;#Created Time: &quot;.strftime(&quot;%Y/%m/%d %H:%M&quot;))
-call append(line(&quot;.&quot;)+3, &quot;&quot;)
-elseif &amp;filetype == 'sh'
-call setline(1,&quot;#!/usr/bin/env bash&quot;)
-call append(line(&quot;.&quot;),&quot;#enconding=utf-8&quot;)
-call append(line(&quot;.&quot;)+1, &quot;#Author: Bai Shuming&quot;)
-call append(line(&quot;.&quot;)+2, &quot;#Created Time: &quot;.strftime(&quot;%Y/%m/%d %H:%M&quot;))
-call append(line(&quot;.&quot;)+3, &quot;&quot;)
-elseif &amp;filetype == 'c'
-call setline(1,&quot;#include &lt;stdio.h&gt;&quot;)
-call append(line(&quot;.&quot;), &quot;&quot;)
-endif</p>
-<p>endfunc</p>
+<pre><code>autocmd BufNewFile *.py,*.sh,*.c exec &quot;:call SetTitle()&quot;
+
+func SetTitle()
+        if &amp;filetype == 'python'
+                call setline(1,&quot;\#!/usr/bin/env python&quot;)
+                call append(line(&quot;.&quot;),&quot;\#enconding=utf-8&quot;)
+                call append(line(&quot;.&quot;)+1, &quot;\#Author: Bai Shuming&quot;)
+                call append(line(&quot;.&quot;)+2, &quot;\#Created Time: &quot;.strftime(&quot;%Y/%m/%d %H:%M&quot;))
+                call append(line(&quot;.&quot;)+3, &quot;&quot;)
+    elseif &amp;filetype == 'sh'
+                call setline(1,&quot;\#!/usr/bin/env bash&quot;)
+                call append(line(&quot;.&quot;),&quot;\#enconding=utf-8&quot;)
+                call append(line(&quot;.&quot;)+1, &quot;\#Author: Bai Shuming&quot;)
+                call append(line(&quot;.&quot;)+2, &quot;\#Created Time: &quot;.strftime(&quot;%Y/%m/%d %H:%M&quot;))
+                call append(line(&quot;.&quot;)+3, &quot;&quot;)
+    elseif &amp;filetype == 'c'
+        call setline(1,&quot;#include &lt;stdio.h&gt;&quot;)
+        call append(line(&quot;.&quot;), &quot;&quot;)
+        endif
+
+endfunc
+</code></pre>
 ]]></content>
     </entry>
     <entry>
