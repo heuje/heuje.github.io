@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://heuje.top</id>
     <title>Heuje</title>
-    <updated>2019-06-17T03:28:55.324Z</updated>
+    <updated>2019-06-17T05:18:44.814Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://heuje.top"/>
     <link rel="self" href="https://heuje.top/atom.xml"/>
@@ -10,6 +10,223 @@
     <logo>https://heuje.top/images/avatar.png</logo>
     <icon>https://heuje.top/favicon.ico</icon>
     <rights>All rights reserved 2019, Heuje</rights>
+    <entry>
+        <title type="html"><![CDATA[用户和组]]></title>
+        <id>https://heuje.top/post/yong-hu-he-zu</id>
+        <link href="https://heuje.top/post/yong-hu-he-zu">
+        </link>
+        <updated>2019-06-17T05:16:53.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>用户和组
+用户创建，删除，修改
+密码及密码文件
+组创建，删除，修改
+组密码及组配置文件
+相关文件
+linux用户分类
+
+超级管理员: UID为0 root用户拥有至高无上的命令，root用户不能改名
+
+系统用户:UID小于1000，用于管理服务，一般不允许登陆
+
+普通用户:UID大于或等于1000，权限较小，允许登陆，只能使用bin下命令
+
+1.用户创建，删除，修改
+
+useradd命令
+
+ useradd - create a new user or update default new user information
+
+
+-c,  --comment  描述
+-d,  --home HOME_DIR 家目录
+-e, --expiredate EXPIRE_DATE  过期时间
+-f, --inactive INACTIVE 是否启用过期机制
+-g, --gid GROUP   指定组ID号
+-G, --groups GROUP1[,GROUP2,...[,GROUPN]]]  附加组
+-m, --create-home     建立家目录           
+-M                    不建立家目录
+           Do not create the user′s home directory, even if the system wide
+           setting from /etc/login.defs (CREATE_HOME) is set to yes.
+
+-N, --no-user-group 不指定用户同名组
+-r, --system    指定该帐号是系统帐号
+-s, --shell SHELL  指定登录shell
+-u, --uid UID   指定用户ID号
+-U, --user-group 指定用户创建用户同名组
+-o 创建用户是可以uid重复
+
+
+注意：用户名不能超过 32 个字符
+usermod命令
+
+usermod - modify a user account
+-a, --append
+-L, --lock
+-U, --unlock
+-m, --move-home with -d
+userdel命令
+
+userdel - delete a user account and related files
+-f, --force
+-r, --remove 删除主目录及邮箱
+change命令
+
+chage
+-h, --help    display this help message and exit
+-m 密码可更改的最小天数。为零时代表任何时候都可以更改密码。
+-M 密码保持有效的最大天数。
+-W 用户密码到期前，提前收到警告信息的天数。
+-E 帐号到期的日期。过了这天，此帐号将不可用。
+-d 上一次更改的日期    如果设置为0 用户下次登录必须改密码
+-i 停滞时期。如果一个密码已过期这些天，那么此帐号将不可用
+-l 例出当前的设置。由非特权用户来确定他们的密码或帐号何时过期。
+2.密码设置及密码文件
+
+passwd命令
+
+passwd - set user password
+-l lock
+-u unlock
+-d delete a passwd  for an account
+-S  This will output a short information about  the  status  of  the password for a given account.
+--stdin
+    echo linux |passwd --stdin vfast    1 &gt; 0
+密码文件
+
+/etc/passwd
+   User account information.
+
+       [用户名]：[密码]：[UID]：[GID]：[身份描述]：[主目录]：[登录shell] 
+
+/etc/shadow
+           Secure user account information.
+
+                 用户名:这是用户登录系统时使用的用户名，它在系统中是惟一的
+                 口令:此字段存放加密的口令
+                 最后一次修改的时间:标识从某一时刻起到用户最后一次修改口令的天数
+                 最小时间间隔:两次修改口令之间的最小天数
+                 最大时间间隔:口令保持有效的最多天数，即多少天后必须修改口令
+                 警告时间:从系统开始警告到口令正式失效的天数
+                 不活动时间:口令过期多少天后，该账号被禁用
+                 失效时间:指示口令失效的绝对天数（从1970年1月1日开始计算）
+                 标志:未使用
+3.组的管理
+
+groupadd
+
+groupadd - create a new group
+
+命令语法
+groupadd [选项] 组名
+
+
+命令选项
+-g, --gid GID        指定GID
+-r, --system        创建一个系统组
+-o, --non-unique    此选项允许添加一个使用非唯一 GID 的组
+
+
+注意：组名最长为 32 个字符
+groupmod命令
+
+groupmod - modify a group definition on the system
+
+命令语法
+groupmod [选项] 组名
+
+命令选项
+-g, --gid GID
+-n, --new-name NEW_GROUP  给组改名
+-o, --non-unique 
+
+
+例子  
+1、将组名为test3的名字改为baism
+groupmod test3 -n baism
+groupdel命令
+
+groupdel - delete a group
+4.组密码及组配置文件
+
+gpasswd命令
+
+gpasswd  newgrp
+gpasswd - administer /etc/group and /etc/gshadow
+-a, --add USER                add USER to GROUP
+-d, --delete USER             remove USER from GROUP
+-r, --remove-password         remove the GROUP's password
+-R, --restrict                restrict access to GROUP to its members 限制用户登录该组，除了组成员。
+-M, --members USER,...        set the list of members of GROUP
+-A, --administrators ADMIN,...
+                                set the list of administrators for GROUP
+
+
+案例：
+设置组root密码    #gpasswd root
+用户组身份切换为root $newgrp root
+组管理员设置 #gpasswd test -A user3
+限制陌生用户切换到组 #gpasswd -R test
+指定组的成员列表   # gpasswd test -M user3,user2
+/etc/group
+  Group account information.
+
+      [组名]：[密码域]：[GID]：[组员列表] 
+
+/etc/gshadow
+  Secure group account information.
+5.相关文件
+
+/etc/passwd
+        用户账户信息。
+
+/etc/shadow
+        安全用户账户信息。
+
+/etc/group
+        组账户信息。
+
+/etc/gshadow
+         安全组账户信息。
+
+/etc/default/useradd
+           账户创建的默认值。
+
+/etc/skel/
+           包含默认文件的目录。
+
+/etc/login.defs
+           Shadow 密码套件配置。
+6.问题：
+
+       当一个用户同时属于多个组，如何切换组身份  newgrp 命令 
+            su - user1 
+            newgrp test     切换到test组
+
+       如何临时切换到某个外组【用户本身不属于这个组】
+            1）首先给外组设置一个组密码 
+                 gpasswd root
+                 正在修改 root 组的密码
+                 新密码：
+                 请重新输入新密码
+                 su - user1
+                 newgrp root
+7、作业
+
+要求创建用户harry tom natasha
+要求harry tom 附件到admin组
+natasha不允许交互登陆
+
+修改默认创建用户环境
+要求用户家目录为/rhome
+uid,gid从1000开始
+登陆shell为/bin/csh
+要求:
+例如：使用useradd a
+
+创建a的家目录为/rhome/a uid 1000 gid 1000 shell:/bin/csh
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vim编辑器]]></title>
         <id>https://heuje.top/post/vim-bian-ji-qi</id>
