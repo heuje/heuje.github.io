@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Linux 中的硬链接和软链接 | Heuje</title>
+<link rel="shortcut icon" href="https://heuje.top/favicon.ico?v=1560936740346">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://heuje.top/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://heuje.top">
+  <img class="avatar" src="https://heuje.top/images/avatar.png?v=1560936740346" alt="">
+  </a>
+  <h1 class="site-title">
+    Heuje
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Linux 中的硬链接和软链接
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-06-19 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <p>在 Linux 的世界里，大部分文件一旦被删除，文件相关的 inode 信息都会被抹掉，文件占用的磁盘空间也会被释放，这种情况下文件名和 inode 是一对一的，删了，就没了。为了满足更复杂的文件操作，Linux 系统的设计者提供了更为高级的服务，那就是硬链接和软链接的技术，这些技术让 Linux 世界里的文件和目录具备了副本和替身的能力。效果就是，你明明删除了某个文件，但是如果有人在你删除之前做了文件的硬链接，你会发现同样内容的文件依旧存在于系统中，而你刚刚做的修改还在那里冒着热气。</p>
+<ul>
+<li>硬链接
+基于 inode 技术，Linux 允许多个文件名同时指向一个 inode，好处就是，我们可以用不同的文件名去访问同一个文件，每次操作对文件内容的影响会波及到所有「副本」，删除掉一个「副本」，不会影响其他文件。增加一个硬链接文件，仅仅是inode 里的「Links」属性值加一，删除一个硬链接文件，属性值减一。只有「Links」的值为0时，文件才会被彻底删除，回收其占用的空间。
+如何创建一个硬链接文件？非常简单：</li>
+</ul>
+<pre><code>ln sourcefile destfile
+</code></pre>
+<p>前者是源文件，后者是目标文件，创建完成后，使用 stat 命令查看其中之一，就会发现 Links 的值变为2了，用 ls -i 查看文件，你会发现这两个文件的 inode 号是相同的。</p>
+<p>如果我们使用 Vim 在同一个缓冲区（buffer）中打开这两个文件：</p>
+<pre><code>vim sourcefile
+:new destfile
+</code></pre>
+<p>以上命令会在 Vim 中打开两个窗口，你在操作其中一个文件时，会发现另一个窗口是同步联动的。</p>
+<p>硬链接的应用场景比较广泛，比如多人修改同一个文件、重要文件备份、文件更新、节省磁盘空间等等。这些方便的特性都源于 inode 的设计思想。</p>
+<p>注意：我们无法为目录创建硬链接，但是操作系统利用特权偷偷在每个目录下创建了两个硬链接，一个是「.」，另一个是「..」，使用 ls -ai 命令可以看到这两个硬链接目录和 inode 号，前者代表了当前目录，后者代表当前目录的父级目录。</p>
+<p>硬链接不创建 inode，所以无法跨文件系统，这一点可以由软链接实现。</p>
+<ul>
+<li>软连接</li>
+</ul>
+<p>软链接理解起来比较容易，类似 Windows 系统中的快捷方式。</p>
+<p>软链接会创建新的 inode，inode 里主要记录了源文件的路径，当访问软链接文件时，系统会帮你自动指向源文件，无论你操作的是源文件，还是软链接文件，其实你最终操作的都是源文件，源文件删除了，软连接文件就成了无本之木，也就毫无意义，强制访问的后果就是「No such file or directory」。</p>
+<p>创建软链接的命令如下：</p>
+<pre><code>ln -s sourcefile destfile
+</code></pre>
+<p>尝试用 stat 命令查看这两个文件的 inode 信息。</p>
+<p>软链接可以创建目录的软链接，也能跨文件系统存在，在Linux系统中被大量使用。一旦源文件/目录不存在了，软链接的使命也就完结了。</p>
+
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://heuje.top/post/yong-hu-he-zu">
+              <h3 class="post-title">
+                用户和组
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Heuje</a> | 
+  <a class="rss" href="https://heuje.top/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
